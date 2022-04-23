@@ -13,6 +13,13 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 @angular/google-maps
 @angular/material
 
+## Screenshots
+## Login Screen
+![Alt text](screenshots/login.png "Optional Title")
+
+
+## Truck Status Screen
+![Alt text](screenshots/truck_status_in_googlemap.png "Optional Title")
 
 ## Code scaffolding
 
