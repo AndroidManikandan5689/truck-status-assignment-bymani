@@ -9,9 +9,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Libraries Used in this Project
 
-@angular/flex-layout
-@angular/google-maps
-@angular/material
+- @angular/flex-layout
+- @angular/google-maps
+- @angular/material
 
 ## Test Data
 
@@ -25,6 +25,11 @@ Login Credentials: assignmentuser@gmail.com / qwerty123
 ## Truck Status Screen
 ![Alt text](screenshots/truck_status_in_googlemap.png "Truck Status (Web)")
 ![Alt text](screenshots/truck_status_in_googlemap_mobile.png "Truck Status (Mobile)")
+
+## Known Issue
+**I am used my google map api key (Javascript Map SDK), It's not activated to Billing, So, it will showing this error while the initial load, It will works after refresh the page**
+
+![Alt text](screenshots/known_issue.png "Truck Status (Web)")
 
 ## Code scaffolding
 
