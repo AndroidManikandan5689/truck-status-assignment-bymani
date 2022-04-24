@@ -13,6 +13,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 @angular/google-maps
 @angular/material
 
+## Test Data
+
+Login Credentials: assignmentuser@gmail.com / qwerty123
+
 ## Screenshots
 ## Login Screen
 ![Alt text](screenshots/login.png "Optional Title")

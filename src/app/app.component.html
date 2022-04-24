@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
-    <mat-nav-list>
+    <mat-nav-list *ngIf="isLogged">
       <a mat-list-item routerLink="/">
         <mat-icon class="icon">home</mat-icon>
         <span class="label">Home</span>
@@ -14,7 +14,7 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <div fxHide.gt-xs>
-        <button mat-icon-button (click)="sidenav.toggle()">
+        <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isLogged">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
@@ -23,7 +23,7 @@
           Truck Status
         </a>
       </div>
-      <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs *ngIf="currentUser != null">
+      <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs *ngIf="isLogged">
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
           <li>
             <a routerLink="/">

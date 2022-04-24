@@ -8,13 +8,24 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  currentUser: User;
+  isLogged: Boolean = false;
 
   constructor(private authService: AuthService) {
     try {
-      this.authService.user.subscribe(x => this.currentUser = x);
+      this.authService.isLoginSubject.subscribe(x => this.isLogged = x);
     } catch (error) {
 
+    }
+    this.validateUserLogged();
+  }
+  
+
+  validateUserLogged()
+  {
+    
+    let currentUser = localStorage.getItem('user');
+    if (currentUser != null) {
+      this.isLogged = true;
     }
   }
 

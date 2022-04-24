@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
@@ -12,6 +12,7 @@ import { User } from '../models/User';
 export class AuthService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
+  public isLoginSubject = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -28,6 +29,10 @@ export class AuthService {
    * Get current user details
    */
   public get userValue(): User {
+    let currentUser = localStorage.getItem('user');
+    if (currentUser != null) {
+      return JSON.parse(currentUser);
+    }
     return this.userSubject?.value;
   }
 
@@ -40,6 +45,7 @@ export class AuthService {
         {
         this.userSubject.next(user);
         }
+        this.isLoginSubject.next(true);
         return user;
       }));
   }
@@ -57,6 +63,7 @@ export class AuthService {
     // remove user from local storage and set current user to null
     localStorage.removeItem('user');
     // this.userSubject.next(null);
-    this.router.navigate(['login']);
+    this.isLoginSubject.next(false);
+    this.router.navigate(['/login']);
   }
 }

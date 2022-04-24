@@ -1,3 +1,5 @@
+//https://qa2.gim.com.bd/ejogajog/api/v1/auth/adminLogIn
+//Truckstand api Data Model
 export class User{
     data:         Data;
     success:      boolean;

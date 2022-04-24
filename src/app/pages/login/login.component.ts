@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/shared/component/alert-dialog/alert-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-login',
@@ -21,30 +22,34 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
         private router: Router,
         private authService: AuthService,
-        private alertDialog: MatDialog
+        private alertDialog: MatDialog,
+        private snackBar: MatSnackBar
     ) {
         // redirect to home if already logged in
         if (this.authService.userValue) {
-            this.router.navigate(['/']);
+            let currentUser = localStorage.getItem('user');
+            if (currentUser != null) {
+                this.router.navigate(['/']);
+            }
         }
     }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['assignmentuser@gmail.com', Validators.required],
-            password: ['qwerty123', Validators.required]
+            username: ['', Validators.required],    //assignmentuser@gmail.com
+            password: ['', Validators.required]     //qwerty123
         });
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     // convenience getter for easy access to form fields
     get f(): any { return this.loginForm.controls; }
 
+    /**
+     * Login Api integrated while press login button in logic component
+     * @returns 
+     */
     onSubmit() {
         this.submitted = true;
 
@@ -58,17 +63,37 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    this.loading = false;
+                    if(data.success)
+                    {                        
+                    this.showSnackBar(data.message);
+                    this.router.navigate(["/"]);
+                    }
+                    else{
+                        this.showErrorDialog(data.message);                        
+                    }
+                    console.log(data);
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
-                    this.showErrorDialog(this.error)
+                    this.showErrorDialog(this.error);
                 });
     }
 
+    /**
+     * Show the success message snack bar
+     */
+    showSnackBar(msg: string){
+        this.snackBar.open(msg)
+    }
+
+    /**
+     * Show the common alert dialog for error message
+     * @param msg 
+     */
     showErrorDialog(msg: string) {
-        this.alertDialog.open(AlertDialogComponent, { data: {type: "error", data: msg} })
+        this.alertDialog.open(AlertDialogComponent, { data: { type: "Opps!", data: msg } })
     }
 
 }

@@ -12,13 +12,14 @@ import { Trucks, TrucksResponse } from './../../models/TrucksResponse';
 })
 export class TruckMapComponent implements OnInit {
 
+  //Default option for google map
   mapOptions: google.maps.MapOptions = {
     center: { lat: 23.7045863, lng: 90.4275232 },
     zoom: 14,
     fullscreenControl: true
   }
 
-  truckResponse: TrucksResponse;
+  truckResponse: TrucksResponse;    //Truck Api response
   truckColl: Trucks[] = [];
   markers: any = [];
   center: { lat: 23.7045863, lng: 90.4275232 };
@@ -42,7 +43,7 @@ export class TruckMapComponent implements OnInit {
         },
         label: {
           color: 'red',
-          text: truck.nameBn,
+          text: truck.name,
         },
         icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
         title: truck.name?.toString(),
@@ -67,7 +68,7 @@ export class TruckMapComponent implements OnInit {
           this.addMarkers();
         }
         else {
-          this.showAlertDialog("error", this.truckResponse.message);
+          this.showAlertDialog("Error", this.truckResponse.message);
         }
       }
 

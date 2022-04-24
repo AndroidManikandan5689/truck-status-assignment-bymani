@@ -1,3 +1,5 @@
+//https://qa2.gim.com.bd/ejogajogAdminAPI/api/v1/admin/master/truckstands
+//Truckstand api Data Model
 export class TrucksResponse{
     data:         Trucks[];
     success:      boolean;
