@@ -23,7 +23,8 @@ Login Credentials: assignmentuser@gmail.com / qwerty123
 
 
 ## Truck Status Screen
-![Alt text](screenshots/truck_status_in_googlemap.png "Optional Title")
+![Alt text](screenshots/truck_status_in_googlemap.png "Truck Status (Web)")
+![Alt text](screenshots/truck_status_in_googlemap_mobile.png "Truck Status (Mobile)")
 
 ## Code scaffolding
 
